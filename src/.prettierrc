@@ -1,0 +1,17 @@
+{
+	"singleQuote": true,
+	"printWidth": 100,
+	"endOfLine": "lf",
+	"useTabs": true,
+	"tabWidth": 4,
+	"importOrder": [
+		"^@mui/(.*)$",
+		"^@components/(.*)$",
+		"^@context/(.*)$",
+		"^@utils/(.*)$",
+		"^[./]"
+	],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true,
+	"plugins": ["@trivago/prettier-plugin-sort-imports"]
+}

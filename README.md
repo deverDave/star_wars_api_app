@@ -1,13 +1,13 @@
 # Star Wars App
 
-This is a Vite React application called Star Wars App. This app provides information about the Star Wars universe.
+This is a Vite React application called Star Wars App. This app is a simple fun Star Wars API Coding Exercise featuring a starship retrieval and dynamic starship data table.
 
 ## Prerequisites
 
 Make sure you have the following installed on your machine:
 
--   Node.js (>= 14.x)
--   npm (>= 6.x) or yarn (>= 1.x)
+- Node.js (>= 14.x)
+- npm (>= 6.x) or yarn (>= 1.x)
 
 ## Getting Started
 
@@ -88,6 +88,6 @@ This project is licensed under the MIT License.
 
 ## Acknowledgements
 
--   [Vite](https://vitejs.dev/)
--   [React](https://reactjs.org/)
--   [Star Wars API](https://swapi.dev/)
+- [Vite](https://vitejs.dev/)
+- [React](https://reactjs.org/)
+- [Star Wars API](https://swapi.dev/)

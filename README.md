@@ -48,7 +48,7 @@ or
 yarn dev
 ```
 
-This will start the app and you can view it in your browser at `http://localhost:3000`.
+This will start the app and you can view it in your browser at `http://localhost:5173`.
 
 ### Building the App
 

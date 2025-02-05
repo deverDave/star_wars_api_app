@@ -13,29 +13,31 @@ const Header = ({ featuredStarship }) => {
 						/>
 					</div>
 					<div className="d-flex gap-3 align-items-center">
-						<span className="orbitron-reg sw-yellow">Starship Stats</span>
-						<img src={Starship} alt="Starship" width={50} />
+						<span className="orbitron-reg sw-yellow text-nowrap">Starship Stats</span>
+						<div className="xWing-wrapper">
+							<img src={Starship} alt="Starship" width={50} />
+						</div>
 					</div>
 				</h1>
 
-				<div className="d-flex-column ">
+				<div className="d-flex-column overflow-hidden">
 					<h4 className="text-center">Featured Starship</h4>
 
 					<ul className="list-group roboto">
-						<li className="list-group-item bg-dark text-light">
+						<li className="list-group-item bg-dark text-light text-truncate">
 							<span className="badge bg-dark text-uppercase text-secondary">
 								Name:
 							</span>{' '}
 							{featuredStarship?.name}
 						</li>
-						<li className="list-group-item bg-dark text-light">
-							<span className="badge bg-dark text-uppercase text-secondary">
+						<li className="list-group-item bg-dark text-light text-truncate">
+							<span className="badge bg-dark text-uppercase text-secondary ">
 								Manufacturer:
 							</span>{' '}
 							{featuredStarship?.manufacturer}
 						</li>
 
-						<li className="list-group-item bg-dark text-light">
+						<li className="list-group-item bg-dark text-light text-truncate">
 							<span className="badge bg-dark text-uppercase text-secondary">
 								Cost:
 							</span>{' '}
@@ -45,7 +47,7 @@ const Header = ({ featuredStarship }) => {
 								: 'unknown'}{' '}
 							{' credits'}
 						</li>
-						<li className="list-group-item bg-dark text-light">
+						<li className="list-group-item bg-dark text-light text-truncate">
 							<span className="badge bg-dark text-uppercase text-secondary">
 								Speed:
 							</span>{' '}

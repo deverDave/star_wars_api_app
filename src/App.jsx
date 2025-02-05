@@ -1,9 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import './App.css';
 import BackgroundStars from './BackgroundStars';
+import CrudModal from './CrudModal';
 import Header from './Header';
 import SortFilter from './SortFilter';
 import StarshipTable from './StarshipTable';
@@ -17,6 +19,8 @@ function App() {
 	const [sortedStarships, setSortedStarships] = useState([]);
 	const [filterValue, setFilterValue] = useState('');
 	const [sortType, setSortType] = useState('');
+	const [currentStarship, setCurrentStarship] = useState(null);
+	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
 		fetchStarships('https://swapi.dev/api/starships/', setLoading, setStarships, setNextPage);
@@ -37,13 +41,9 @@ function App() {
 		setSortType('');
 	};
 
-	const handleSortChange = (newSortType) => {
-		setSortType(newSortType);
-		setSortedStarships(handleSortBy(newSortType, starships));
-	};
-
-	const addStarShip = (starshipData) => {
-		setStarships([...starships, starshipData]);
+	const handleEdit = (starship) => {
+		setCurrentStarship(starship);
+		setShowModal(true);
 	};
 
 	return (
@@ -53,11 +53,19 @@ function App() {
 
 			<section className="bg-black rounded-4 position-relative mx-3">
 				<SortFilter
-					handleSortBy={handleSortChange}
+					handleSortBy={(newSortType) => {
+						setSortType(newSortType);
+						setSortedStarships(handleSortBy(newSortType, starships));
+					}}
 					handleFilter={(string) => handleFilter(string, starships, setSortedStarships)}
 					filterValue={filterValue}
 					setFilterValue={setFilterValue}
-					addStarShip={addStarShip}
+					addStarShip={(starshipData) => {
+						setStarships((starships) => [
+							...starships,
+							{ ...starshipData, id: uuidv4() },
+						]);
+					}}
 				/>
 
 				<StarshipTable
@@ -66,8 +74,25 @@ function App() {
 					nextPage={nextPage}
 					handleLoadMore={handleLoadMore}
 					sortType={sortType}
+					handleEdit={handleEdit}
 				/>
 			</section>
+
+			<CrudModal
+				show={showModal}
+				handleClose={() => setShowModal(false)}
+				editStarShip={(updatedStarship) => {
+					setStarships((prev) =>
+						prev.map((ship) =>
+							ship.id === updatedStarship.id ? updatedStarship : ship,
+						),
+					);
+				}}
+				deleteStarship={(deletedStarship) => {
+					setStarships((prev) => prev.filter((ship) => ship.id !== deletedStarship.id));
+				}}
+				currentStarship={currentStarship}
+			/>
 		</>
 	);
 }

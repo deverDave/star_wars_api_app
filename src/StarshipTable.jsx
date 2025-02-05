@@ -1,6 +1,6 @@
-const StarshipTable = ({ starships, loading, nextPage, handleLoadMore, sortType }) => {
+const StarshipTable = ({ starships, loading, nextPage, handleLoadMore, sortType, handleEdit }) => {
 	return (
-		<div className="mb-5 p-3 pt-0 bg-transparent roboto ">
+		<div className="table-wrapper mb-5 p-3 pt-0 bg-transparent roboto ">
 			{starships.length > 0 && (
 				<table className="table mb-4 rounded-4 min-vh-80">
 					<thead className="sticky-md-top sticky-top3">
@@ -30,6 +30,7 @@ const StarshipTable = ({ starships, loading, nextPage, handleLoadMore, sortType 
 									</span>
 								)}
 							</th>
+							<th>&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,6 +46,19 @@ const StarshipTable = ({ starships, loading, nextPage, handleLoadMore, sortType 
 											: 'unknown'}
 									</td>
 									<td>{starship.max_atmosphering_speed}</td>
+									<td>
+										<button
+											className="btn"
+											onClick={() => handleEdit(starship, index)}
+										>
+											<span
+												className="material-symbols-outlined"
+												style={{ fontSize: 18 }}
+											>
+												edit
+											</span>
+										</button>
+									</td>
 								</tr>
 							))}
 					</tbody>

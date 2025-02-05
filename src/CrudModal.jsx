@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react';
 
-const CrudModal = ({ addStarShip, editStarShip, currentStarship }) => {
+import { isFormValid } from './utils';
+
+const CrudModal = ({
+	show,
+	handleClose,
+	addStarShip,
+	editStarShip,
+	deleteStarship,
+	currentStarship,
+}) => {
 	const blankStarship = {
+		id: null,
 		name: '',
 		manufacturer: '',
 		cost_in_credits: '',
@@ -10,7 +20,7 @@ const CrudModal = ({ addStarShip, editStarShip, currentStarship }) => {
 
 	const [newStarship, setNewStarship] = useState(blankStarship);
 
-	// Handle form state when currentStarship changes
+	// Sync form data with selected starship
 	useEffect(() => {
 		if (currentStarship) {
 			setNewStarship(currentStarship);
@@ -19,95 +29,83 @@ const CrudModal = ({ addStarShip, editStarShip, currentStarship }) => {
 		}
 	}, [currentStarship]);
 
+	// Reset form when modal closes
+	const resetForm = () => {
+		setNewStarship(blankStarship);
+		handleClose();
+	};
+
 	return (
-		<div
-			className="modal fade"
-			id="exampleModal"
-			tabIndex="-1"
-			aria-labelledby="exampleModalLabel"
-			aria-hidden="true"
-		>
+		<div className={`modal fade ${show ? 'show d-block' : ''}`} tabIndex="-1">
 			<div className="modal-dialog modal-dialog-centered">
-				<div className="modal-content">
+				<div className="modal-content bg-dark text-light ">
 					<div className="modal-header">
-						<h1 className="modal-title fs-5" id="exampleModalLabel">
-							{currentStarship ? 'Edit Starship' : 'Add a Starship'}
+						<h1 className="modal-title fs-5">
+							{currentStarship ? 'Edit Starship' : 'Add Starship'}
 						</h1>
 						<button
 							type="button"
-							className="btn-close"
-							data-bs-dismiss="modal"
-							aria-label="Close"
-							onClick={() => setNewStarship(blankStarship)}
+							className="btn-close  btn-close-white"
+							onClick={resetForm}
 						></button>
 					</div>
-					<div className="modal-body">
-						<form className="roboto">
+					<div className="modal-body roboto">
+						<form>
 							<div className="mb-2">
-								<label htmlFor="starshipName" className="form-label mb-0">
-									Name
-								</label>
+								<label className="form-label mb-0">Name</label>
 								<input
 									type="text"
 									className="form-control"
-									id="starshipName"
 									value={newStarship.name}
-									required
 									onChange={(e) =>
-										setNewStarship({ ...newStarship, name: e.target.value })
+										setNewStarship((prev) => ({
+											...prev,
+											name: e.target.value,
+										}))
 									}
 								/>
 							</div>
 							<div className="mb-2">
-								<label htmlFor="starshipManufacturer" className="form-label mb-0">
-									Manufacturer
-								</label>
+								<label className="form-label mb-0">Manufacturer</label>
 								<input
 									type="text"
 									className="form-control"
-									id="starshipManufacturer"
 									value={newStarship.manufacturer}
-									required
 									onChange={(e) =>
-										setNewStarship({
-											...newStarship,
+										setNewStarship((prev) => ({
+											...prev,
 											manufacturer: e.target.value,
-										})
+										}))
 									}
+									required
 								/>
 							</div>
 							<div className="mb-2">
-								<label htmlFor="starshipCost" className="form-label mb-0">
-									Cost
-								</label>
+								<label className="form-label mb-0">Cost</label>
 								<input
 									type="text"
 									className="form-control"
-									id="starshipCost"
 									value={newStarship.cost_in_credits}
 									onChange={(e) =>
-										setNewStarship({
-											...newStarship,
+										setNewStarship((prev) => ({
+											...prev,
 											cost_in_credits: e.target.value,
-										})
+										}))
 									}
 									required
 								/>
 							</div>
 							<div className="mb-2">
-								<label htmlFor="starshipSpeed" className="form-label mb-0">
-									Speed
-								</label>
+								<label className="form-label mb-0">Speed</label>
 								<input
 									type="text"
 									className="form-control"
-									id="starshipSpeed"
 									value={newStarship.max_atmosphering_speed}
 									onChange={(e) =>
-										setNewStarship({
-											...newStarship,
+										setNewStarship((prev) => ({
+											...prev,
 											max_atmosphering_speed: e.target.value,
-										})
+										}))
 									}
 									required
 								/>
@@ -115,25 +113,33 @@ const CrudModal = ({ addStarShip, editStarShip, currentStarship }) => {
 						</form>
 					</div>
 					<div className="modal-footer">
-						<button
-							type="button"
-							className="btn btn-secondary"
-							data-bs-dismiss="modal"
-							onClick={() => setNewStarship(blankStarship)}
-						>
+						<button type="button" className="btn btn-secondary" onClick={resetForm}>
 							Close
 						</button>
+
+						{currentStarship && (
+							<button
+								type="button"
+								className="btn btn-danger"
+								onClick={() => {
+									deleteStarship(currentStarship);
+									resetForm();
+								}}
+							>
+								Delete
+							</button>
+						)}
+
 						<button
 							type="button"
-							className="btn btn-primary"
-							data-bs-dismiss="modal"
+							className="btn bg-sw-yellow"
 							onClick={() => {
-								if (currentStarship) {
-									editStarShip(newStarship); // Edit mode
-								} else {
-									addStarShip(newStarship); // Add mode
+								if (!isFormValid(newStarship)) {
+									alert('All fields are required.');
+									return;
 								}
-								setNewStarship(blankStarship); // Reset form
+								(currentStarship ? editStarShip : addStarShip)(newStarship);
+								resetForm();
 							}}
 						>
 							Save changes

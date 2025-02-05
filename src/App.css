@@ -47,22 +47,25 @@ body {
 	background-color: #cfbd13;
 }
 
+.sort-wrapper {
+	z-index: 9999;
+}
+
 .dropdown-menu li:hover {
 	cursor: pointer;
 }
+
 .modal {
-	z-index: 999999999;
+	z-index: 9;
 	position: fixed;
+	z-index: 99999;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 .modal-dialog {
 	position: relative;
-	z-index: 999999999;
-}
-.modal-content {
-	position: relative;
-	z-index: 999999999;
 }
 
+/* Responsive Breakpoints */
 @media (max-width: 767px) {
 	.header {
 		position: relative;
@@ -71,26 +74,88 @@ body {
 		font-size: 13px;
 	}
 }
+@media (max-width: 576px) {
+	.sort-wrapper > div:first-of-type {
+		width: 100%;
+	}
+}
 @media (max-width: 450px) {
 	html {
 		font-size: 11px;
 	}
 }
-
+@media (max-width: 400px) {
+	.table-wrapper {
+		font-size: 10px;
+		width: 100%;
+		/* min-width: 380px; */
+		overflow: hidden;
+		overflow-x: scroll;
+	}
+}
 @media (min-width: 768px) {
 	@supports ((position: -webkit-sticky) or (position: sticky)) {
 		.sticky-top2 {
 			position: -webkit-sticky;
 			position: sticky;
-			top: 220px;
-			z-index: 1019;
+			top: 222px;
+			z-index: 10199;
 		}
 		.sticky-top3 {
 			position: -webkit-sticky;
 			position: sticky;
-			top: 338px;
+			top: 333px;
 			z-index: 1019;
 			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 		}
+	}
+}
+
+/* Blaster Animation	 */
+.xWing-wrapper {
+	position: relative;
+	z-index: 99;
+}
+.xWing-wrapper img {
+	position: relative;
+}
+.xWing-wrapper::before,
+.xWing-wrapper::after {
+	content: '';
+	position: absolute;
+	background: rgb(238, 56, 56);
+	border-radius: 25%;
+	box-shadow: 0 0 9px 3px rgb(238, 56, 56);
+	opacity: 0;
+	width: 15px;
+	height: 3px;
+}
+.xWing-wrapper::before {
+	top: 7%;
+	left: 60%;
+	animation:
+		xWingShoot 0.5s linear 0.3s 4,
+		xWingShoot 0.5s linear 6.3s 4,
+		xWingShoot 0.5s linear 12.3s 4;
+}
+.xWing-wrapper::after {
+	bottom: 5%;
+	left: 60%;
+	animation:
+		xWingShoot 0.5s linear 0s 4,
+		xWingShoot 0.5s linear 6s 4,
+		xWingShoot 0.5s linear 12s 4;
+}
+
+@keyframes xWingShoot {
+	0% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(40px);
+	}
+	100% {
+		transform: translateX(90px);
 	}
 }

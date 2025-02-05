@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 // Fetch starships data from the API
 export const fetchStarships = async (url, setLoading, setStarships, setNextPage) => {
@@ -7,6 +8,9 @@ export const fetchStarships = async (url, setLoading, setStarships, setNextPage)
 		const response = await axios.get(url);
 		const starshipData = response.data.results;
 		setLoading(false);
+		starshipData.forEach((starship) => {
+			starship.id = uuidv4();
+		});
 		setStarships((prevStarships) => [...prevStarships, ...starshipData]);
 		setNextPage(response.data.next);
 	} catch (error) {
@@ -63,4 +67,11 @@ export const handleFilter = (string, starships, setSortedStarships) => {
 		);
 		return filteredArray;
 	});
+};
+
+// Check if form fields are empty
+export const isFormValid = (newStarship) => {
+	return !Object.values(newStarship).some(
+		(value) => typeof value === 'string' && value.trim() === '',
+	);
 };

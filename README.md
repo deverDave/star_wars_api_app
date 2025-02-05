@@ -2,6 +2,8 @@
 
 This is a Vite React application called Star Wars App. This app is a simple fun Star Wars API Coding Exercise featuring a starship retrieval and dynamic starship data table.
 
+View hosted production build at: https://starwars.koboldwebsites.com/
+
 ## Prerequisites
 
 Make sure you have the following installed on your machine:
@@ -71,23 +73,15 @@ The build artifacts will be stored in the `dist` directory.
 To preview the production build locally, you can use the following command:
 
 ```bash
-npm run serve
+npm run preview
 ```
 
-or
-
-```bash
-yarn serve
-```
-
-This will serve the contents of the `dist` directory at `http://localhost:5000`.
-
-## License
-
-This project is licensed under the MIT License.
+This will serve the contents of the `dist` directory at `http://localhost:4173`.
 
 ## Acknowledgements
 
 - [Vite](https://vitejs.dev/)
 - [React](https://reactjs.org/)
 - [Star Wars API](https://swapi.dev/)
+- [Star Wars logo](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/694px-Star_Wars_Logo.svg.png)
+- [Starfield CSS (adapted)](https://codepen.io/keithclark/pen/DQdKbg)

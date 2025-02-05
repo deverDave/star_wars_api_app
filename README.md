@@ -8,8 +8,8 @@ View hosted production build at: https://starwars.koboldwebsites.com/
 
 Make sure you have the following installed on your machine:
 
-- Node.js (>= 14.x)
-- npm (>= 6.x) or yarn (>= 1.x)
+- Node.js (>= 21.7.1)
+- npm (>= 10.5.0)
 
 ## Getting Started
 
@@ -30,24 +30,12 @@ Follow these instructions to get the project up and running on your local machin
     npm install
     ```
 
-    or
-
-    ```bash
-    yarn install
-    ```
-
 ### Running the App in Development Mode
 
 To start the development server, run:
 
 ```bash
 npm run dev
-```
-
-or
-
-```bash
-yarn dev
 ```
 
 This will start the app and you can view it in your browser at `http://localhost:5173`.
@@ -58,12 +46,6 @@ To create a production build of the app, run:
 
 ```bash
 npm run build
-```
-
-or
-
-```bash
-yarn build
 ```
 
 The build artifacts will be stored in the `dist` directory.

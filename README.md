@@ -2,7 +2,7 @@
 
 This is a Vite React application called Star Wars App. This app is a simple fun Star Wars API Coding Exercise featuring a starship retrieval and dynamic starship data table.
 
-View hosted production build at: https://starwars.koboldwebsites.com/
+View hosted production build at: [https://starwars.koboldwebsites.com/](https://starwars.koboldwebsites.com/){:target="\_blank"}
 
 ## Prerequisites
 
